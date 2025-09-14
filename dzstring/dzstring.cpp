@@ -5,7 +5,7 @@ using namespace std;// для strlen, strcpy
 class String {
 private:
     char* data;
-    size_t size;
+    size_t size; //
 
 public:
     //конструктор за замовчуванням
@@ -69,6 +69,26 @@ public:
         return String(newData);
     }
 
+    char operator[](size_t x) const { //конкатрація рядків
+        return data[x];
+    }
+
+    bool operator==(const String& other) const {
+        return strcmp(data, other.data) == 0;
+    }
+
+    bool operator!=(const String& other) const {
+        return strcmp(data, other.data) != 0;
+    }
+
+    void erase(size_t x, size_t x2) {
+        for (size_t i = x; i + x2 <= size; ++i) {
+            data[i] = data[i + x2];
+        }
+
+        size -= x2;
+    }
+
     //деструктор
     ~String() {
         delete[] data;
@@ -90,13 +110,18 @@ public:
 int main() {
     String a("Hello");
     String a1("World!");
-    String a2("Hello ");
+    String a2("Hello");
+    String a3("Hells");
     String b = a;   // конструктор копіювання
-    String c = std::move(a); // конструктор переміщення
+    String c = move(a); // конструктор переміщення
 
-    b.print();
-    c.print();
-
-    String v = a2 + a1;
-    v.print();
+    //b.print();
+    //c.print();
+    //bool x = a2 == a3;
+    //String v = a2 + a1;
+    //cout << v[0] << endl;
+    //cout << x << endl;
+    //v.print();
+    a3.erase(0, 1);
+    a3.print();
 }
