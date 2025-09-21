@@ -89,6 +89,43 @@ public:
         size -= x2;
     }
 
+    void replace(String x, size_t id1, size_t id2) {
+        size_t counter = 0;
+        for (size_t i = id1; i < id2; i++) {
+            data[i] = x[counter];
+            counter += 1;
+        }
+    }
+
+    String substr(size_t id1, size_t id2) {
+        size_t newsize = id2 - id1;
+        char* newdata;
+        newdata = new char[newsize + 1];
+        size_t counter = 0;
+        for (size_t i = id1; i < id2; i++) {
+            newdata[counter] = data[i];
+            counter += 1;
+        }
+        newdata[counter] = '\0';
+        return String(newdata);
+    }
+    bool empty() {
+        if (size == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    void insert(String x, size_t id) {
+        size_t counter = 0;
+        for (size_t i = id; i < id+x.size; i++) {
+            data[i] = x[counter];
+            counter += 1;
+        }
+    }
+
     //деструктор
     ~String() {
         delete[] data;
@@ -115,6 +152,17 @@ int main() {
     String b = a;   // конструктор копіювання
     String c = move(a); // конструктор переміщення
 
+    String x = ("xxxxxxxxxx"); //10x
+    String x2 = "12345";
+    //String x0 = "";
+    //x.replace(x2, 3, 7);
+    //x.print(); //xxx1234xxx
+    //String x3 = x2.substr(1, 4); //234
+    //x3.print();
+    //cout << x0.empty() << endl; //1
+    x.insert(x2, 1);
+    x.print(); //x12345xxxx
+
     //b.print();
     //c.print();
     //bool x = a2 == a3;
@@ -122,6 +170,6 @@ int main() {
     //cout << v[0] << endl;
     //cout << x << endl;
     //v.print();
-    a3.erase(0, 1);
-    a3.print();
+    //a3.erase(0, 1);
+    //a3.print();
 }
